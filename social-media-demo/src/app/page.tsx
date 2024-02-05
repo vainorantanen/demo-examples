@@ -10,7 +10,9 @@ export default function Home() {
       <Link href={`/register`}>Register</Link>
       <Link href={`/login`}>Login</Link>
       <AddFeedPostForm />
+      <div>
       <FeedPostList />
+      </div>
     </div>
   );
 }
