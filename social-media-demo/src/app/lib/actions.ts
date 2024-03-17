@@ -86,3 +86,65 @@ export async function likeFeedPost(postId: string) {
     revalidatePath('/')
     
 }
+
+export async function modifyFeedPost(postId: string, formData: FormData) {
+    try {
+        // do the adding operation
+        const description = formData.get('description') as string
+        
+        if (!description) {
+            throw new Error("No decription")
+        }
+
+        const session = await getServerSession(authOptions)
+
+        if (!session || !session.user || !session.user.email) {
+            throw new Error("No session")
+        }
+
+        await prisma.feedPost.update({where: {
+            id: postId
+        }, data: {
+            description
+        }})
+    } catch (error) {
+        console.log(error)
+    }
+
+    revalidatePath('/')
+}
+
+export async function deletePost(postId: string) {
+    try {
+        
+        const session = await getServerSession(authOptions)
+
+        if (!session || !session.user || !session.user.email) {
+            throw new Error("No session")
+        }
+
+        const post = await prisma.feedPost.findUnique({where: {
+            id: postId
+        }, include: {
+            user: {
+                select: {
+                    email: true
+                }
+            }
+        }})
+
+        if (!post) {
+            throw new Error("No post found")
+        }
+
+        if (post.user.email !== session.user.email) {
+            throw new Error("Not authorized")
+        }
+
+        await prisma.feedPost.delete({where: {id: postId}})
+
+    } catch (error) {
+        console.log(error)
+    }
+    revalidatePath('/')
+}

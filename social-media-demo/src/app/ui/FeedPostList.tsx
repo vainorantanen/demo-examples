@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card"
 import { likeFeedPost } from "../lib/actions"
 import { getAllFeedPosts, getUserDataByUserId } from "../lib/data"
 import LikeFeedPostButton from "./LikeFeedPostButton"
@@ -16,7 +17,7 @@ export default async function FeedPostList() {
             {feedPosts && feedPosts.length > 0 && feedPosts.map(feedPost => {
 
                 return (
-                    <div key={feedPost.id}
+                    <Card key={feedPost.id}
                         className="rounded my-2 p-2 bg-white text-black">
                     <div>
                     <p>{feedPost.description}</p>
@@ -24,7 +25,7 @@ export default async function FeedPostList() {
                     <LikeFeedPostButton postId={feedPost.id} likeFeedPost={likeFeedPost}/>
                     <p>{feedPost.likesCount || 0}</p>
                     </div>
-                </div>
+                </Card>
                 )
             }
                 )

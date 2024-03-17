@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -51,9 +52,9 @@ export default function LoginForm() {
             placeholder="Password"
             className="bg-white text-black rounded-lg px-3 py-2"
           />
-          <button className="bg-blue-600 text-white font-bold cursor-pointer px-6 py-2">
+          <Button className="bg-blue-600 text-white font-bold cursor-pointer px-6 py-2">
             Login
-          </button>
+          </Button>
 
           {error && (
             <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">

@@ -1,5 +1,7 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
+
 export type LikeFeedPostProps = {
     postId: string,
     likeFeedPost: (postId: string) => void
@@ -8,9 +10,9 @@ export type LikeFeedPostProps = {
 export default function LikeFeedPostButton({postId, likeFeedPost}: LikeFeedPostProps) {
 
     return (
-        <button onClick={() => likeFeedPost(postId)}>
+        <Button onClick={() => likeFeedPost(postId)}>
             Like
-        </button>
+        </Button>
     )
 
 }
